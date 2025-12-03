@@ -1,19 +1,37 @@
 <resources>
     <string name="app_name">Kanban</string>
+
+    <!-- status da tarefa -->
+    <string name="status_text">Status</string>
     <string name="status_task_todo">A Fazer</string>
     <string name="status_task_doing">Fazendo</string>
     <string name="status_task_done">Feito</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save_text">Salvar</string>
+    <string name="send_text">Enviar</string>
+    <!-- warning -->
     <string name="text_title_warning">Atenção</string>
     <string name="text_button_warning">Entendi</string>
     <string name="text_message_warning">Mensagem</string>
-
+    <!-- login -->
+    <string name="text_title_login">Login</string>
     <string name="password_empty">Preencha a senha!</string>
-    <string name="email_empty">Preencha seu email!</string>
-
+    <string name="email_empty">Preencha o email!</string>
+    <!-- criação de conta -->
     <string name="password_empty_register">Preencha a senha!</string>
     <string name="email_empty_register">Preencha o email!</string>
-
+    <string name="text_button_register">Enviar</string>
+    <string name="text_title_toolbar_register">Criar Conta</string>
     <string name="description_empty">Preencha a descrição!</string>
+
+    <string name="recover_text">Recuperar Conta</string>
+    <!-- dicas -->
+    <string name="hint_edit_email">Digite seu email</string>
+    <string name="hint_edit_password">Digite sua senha</string>
+    <string name="password_text">Senha!</string>
+    <string name="email_text">Email!</string>
+
+    <string name="text_form_new">Nova Tarefa</string>
+    <string name="description_text">Descrição</string>
+    <string name="description_hint_text">Informe sua nova tarefa</string>
+
 </resources>

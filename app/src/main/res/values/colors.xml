@@ -5,4 +5,7 @@
     <color name="color_default">#E74674</color>
     <color name="sweet">#F7C0CF</color>
     <color name="dark">#680D27</color>
+    
+    <color name="color_delete">#4674E7</color>
+    <color name="color_details">#74E746</color>
 </resources>

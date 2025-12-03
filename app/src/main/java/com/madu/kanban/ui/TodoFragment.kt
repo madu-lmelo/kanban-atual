@@ -6,13 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.madu.kanban.R
 import com.madu.kanban.databinding.FragmentRegisterBinding
 import com.madu.kanban.databinding.FragmentTodoBinding
+import com.madu.kanban.model.Task
+import com.madu.kanban.ui.adapter.TaskAdapter
 
 class TodoFragment : Fragment() {
     private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
+    private lateinit var taskAdapter: TaskAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,10 +27,11 @@ class TodoFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initListeners()
+
+        initRecyclerViewTask(getTask())
     }
 
     private fun initListeners() {
@@ -34,6 +39,19 @@ class TodoFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_formTaskFragment)
         }
     }
+
+    private fun initRecyclerViewTask(taskList: List<Task>) {
+        taskAdapter = TaskAdapter(taskList)
+        binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewTask.setHasFixedSize(true)
+
+        binding.recyclerViewTask.adapter = taskAdapter
+    }
+
+    private fun getTask() = listOf(
+        Task("0","criar nova tela do app"),
+        Task("1", "validar informações")
+    )
 
     override fun onDestroyView() {
         super.onDestroyView()
