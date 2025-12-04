@@ -9,11 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import com.madu.kanban.R
 import com.madu.kanban.databinding.FragmentSplashBinding
-
-
+import com.google.firebase.auth.FirebaseAuth
 
 class SplashFragment : Fragment() {
 
@@ -36,22 +34,21 @@ class SplashFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            checkAuth() }
-        ,3000)
+        Handler(Looper.getMainLooper()).postDelayed({ checkAuth() }, 3000)
     }
 
-    private fun checkAuth(){
+
+    private fun checkAuth() {
         try {
             val currentUser = auth.currentUser
 
             if (currentUser != null) {
                 findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
-            }else{
-                findNavController().navigate(R.id.action_splashFragment_to_authentication)
+            } else {
+                findNavController().navigate(R.id.authentication)
             }
-        }catch (e: Exception){
-            Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), e.message ?:toString(), Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_splashFragment_to_authentication)
         }
     }
