@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "708671438352",
+    "project_id": "kanban-dm",
+    "storage_bucket": "kanban-dm.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708671438352:android:372d13aff4912b70139495",
+        "android_client_info": {
+          "package_name": "com.madu.kkanban"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPyEyCzj9Juz2BlsMsgypPwfEuufv7jYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

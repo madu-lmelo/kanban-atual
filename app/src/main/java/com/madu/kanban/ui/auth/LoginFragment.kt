@@ -6,16 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.madu.kanban.R
 import com.madu.kanban.databinding.FragmentLoginBinding
-import com.madu.kanban.databinding.FragmentRegisterBinding
 import com.madu.kanban.util.showBottomSheet
+import androidx.core.view.isVisible
+
+// É necessário importar a extensão isVisible
+import androidx.core.view.isVisible // <<<< Importação NECESSÁRIA
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +33,14 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
+
+        // CORREÇÃO 1: Verifique se o usuário já está logado
+        if (auth.currentUser != null) {
+            findNavController().navigate(R.id.action_global_homeFragment)
+        }
+
         initListener()
     }
 
@@ -50,12 +63,34 @@ class LoginFragment : Fragment() {
         val senha = binding.editTextSenha.text.toString().trim()
         if (email.isNotBlank()) {
             if (senha.isNotBlank()) {
-                findNavController().navigate(R.id.action_global_homeFragment)
+                binding.progressBar.isVisible = true // Mostra o carregamento
+                loginUser(email, senha)
+
             } else {
                 showBottomSheet(message = getString(R.string.password_empty))
             }
         } else {
             showBottomSheet(message = getString(R.string.email_empty))
+        }
+    }
+
+    private fun loginUser(email: String, password: String){
+        try{
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    binding.progressBar.isVisible = false
+
+                    if (task.isSuccessful){
+                        findNavController().navigate(R.id.action_global_homeFragment)
+                    }
+                    else{
+                        Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+        }catch (e: Exception){
+            binding.progressBar.isVisible = false
+            Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
